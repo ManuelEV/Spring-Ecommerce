@@ -1,6 +1,6 @@
 package cl.dci.eshop.security;
 
-import com.example.demo.auth.UserService;
+import cl.dci.eshop.auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.example.demo.security.ApplicationUserRole.*;
-import static com.example.demo.security.ApplicationUserRole.STUDENT;
+import static cl.dci.eshop.security.ApplicationUserRole.*;
 
 
 @Configuration

@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.example.demo.security.ApplicationUserPermission.*;
+import static cl.dci.eshop.security.ApplicationUserPermission.*;
 
 
 public enum ApplicationUserRole {
