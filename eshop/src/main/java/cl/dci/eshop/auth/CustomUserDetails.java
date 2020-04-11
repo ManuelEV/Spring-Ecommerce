@@ -17,7 +17,7 @@ public class CustomUserDetails implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
-    @Column
+    @Column(unique = true)
     private String username;
     @Column
     private String password;
