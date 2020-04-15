@@ -1,7 +1,9 @@
 package cl.dci.eshop.controller;
 
 
-import cl.dci.eshop.auth.CustomUserDetails;
+import cl.dci.eshop.auth.User;
+import cl.dci.eshop.model.Carrito;
+import cl.dci.eshop.repository.CarritoRepository;
 import cl.dci.eshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +21,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CarritoRepository carritoRepository;
 
     @Autowired
     public UserController(PasswordEncoder passwordEncoder) {
@@ -28,22 +32,43 @@ public class UserController {
     @GetMapping
     public String getAllStudents() {
         String password = passwordEncoder.encode("password");
-        CustomUserDetails user1 = new CustomUserDetails("admin",
-                password,
-        ADMIN);
 
-        CustomUserDetails user2 = new CustomUserDetails("admintrainee",
+        User user1 = new User("customer1",
                 password,
-                ADMINTRAINEE);
-        CustomUserDetails user3 = new CustomUserDetails("student",
+        CUSTOMER);
+
+        User user2 = new User("customer2",
                 password,
-                STUDENT);
+                CUSTOMER);
+        User user3 = new User("customer3",
+                password,
+                CUSTOMER);
+        User user4 = new User("admin",
+                password,
+                ADMIN);
+
+        Carrito c1 = new Carrito();
+        Carrito c2 = new Carrito();
+        Carrito c3 = new Carrito();
+        Carrito c4 = new Carrito();
+
+        c1.setUser(user1);
+        c2.setUser(user2);
+        c3.setUser(user3);
+        c3.setUser(user4);
 
         this.userRepository.save(user1);
         this.userRepository.save(user2);
         this.userRepository.save(user3);
+        this.userRepository.save(user4);
 
-        return "OK";
+        this.carritoRepository.save(c1);
+        this.carritoRepository.save(c2);
+        this.carritoRepository.save(c3);
+        this.carritoRepository.save(c4);
+
+        System.out.println("OK BRO");
+        return "redirect:/home";
     }
 
 }

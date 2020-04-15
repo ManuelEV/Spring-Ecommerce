@@ -1,6 +1,7 @@
 package cl.dci.eshop.auth;
 
-import com.example.demo.repository.UserRepository;
+
+import cl.dci.eshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,7 @@ public class UserService  implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<CustomUserDetails> optionalUsers = userRepository.findByUsername(username);
+        Optional<User> optionalUsers = userRepository.findByUsername(username);
 
         optionalUsers
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));

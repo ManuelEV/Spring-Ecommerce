@@ -1,6 +1,7 @@
 package cl.dci.eshop.auth;
 
 
+import cl.dci.eshop.model.Carrito;
 import cl.dci.eshop.security.ApplicationUserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,13 +12,13 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-public class CustomUserDetails implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
     @Column
     private String password;
@@ -30,17 +31,20 @@ public class CustomUserDetails implements UserDetails {
     @Column
     private boolean isEnabled;
 
+    @OneToOne(mappedBy = "user")
+    private Carrito carrito;
+
     @Column(name="role", nullable = false, length = 20 )
     @Enumerated(EnumType.STRING)
     private ApplicationUserRole role;
 
 
 
-    public CustomUserDetails(){}
+    public User(){}
 
-    public CustomUserDetails(String username,
-                           String password,
-                             ApplicationUserRole role) {
+    public User(String username,
+                String password,
+                ApplicationUserRole role) {
         this.username = username;
         this.password = password;
         this.isAccountNonExpired = true;
@@ -51,6 +55,13 @@ public class CustomUserDetails implements UserDetails {
     }
 
 
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -126,5 +137,20 @@ public class CustomUserDetails implements UserDetails {
 
     public void setRole(ApplicationUserRole role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                //", carrito=" + carrito +
+                ", role=" + role +
+                '}';
     }
 }

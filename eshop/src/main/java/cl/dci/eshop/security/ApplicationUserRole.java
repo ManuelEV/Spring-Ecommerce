@@ -10,9 +10,8 @@ import static cl.dci.eshop.security.ApplicationUserPermission.*;
 
 
 public enum ApplicationUserRole {
-    STUDENT(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE)),
-    ADMINTRAINEE(Sets.newHashSet(COURSE_READ, STUDENT_READ));
+    ADMIN(Sets.newHashSet(PRODUCTO_READ, PRODUCTO_WRITE, PRODUCTO_UPDATE, PRODUCTO_DELETE, CARRITO_MANAGE, PERFIL_MANAGE)),
+    CUSTOMER(Sets.newHashSet(PRODUCTO_READ, CARRITO_MANAGE, PERFIL_MANAGE));
 
 
     private final Set<ApplicationUserPermission> permissions;

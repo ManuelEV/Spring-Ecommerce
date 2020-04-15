@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+<body>
+<nav th:fragment="navigation-shop" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/"><i class="fa fa-shopping-basket"></i> Mi tienda</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <!--
+                <li class="nav-item active" th:if="${activeNav}=='catalogo'">
+                    <a class="nav-link" href="/catalogo">Catálogo</a>
+                </li>
+
+                <li class="nav-item" th:unless="${activeNav}=='catalogo'">
+                    <a class="nav-link" href="/catalogo">Catálogo</a>
+                </li>
+                -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/catalogo">Catálogo</a>
+                </li>
+                <li class="nav-item" th:if="${usuarioLogueado}">
+                    <a class="nav-link" href="/carrito">Carrito</a>
+                </li>
+
+                <li class="nav-item" th:if="${usuarioLogueado}">
+                    <a class="nav-link" href="/perfil"> Perfil</a>
+                </li>
+
+                <li class="navbar-brand" th:if="${usuarioLogueado}">
+                    <form class="form-signin" method="get" action="/logout">
+                        <button class="btn btn-warning" type="submit">Logout</button>
+                    </form>
+                </li>
+                <li class="navbar-brand" th:if="${not usuarioLogueado}">
+                    <a href="/registro">
+                        <button class="btn btn-warning" type="button"></i>Registrarse</button>
+                    </a>
+                </li>
+                <li class="navbar-brand" th:if="${rolUsuario} == 'ADMIN'">
+                    <a href="/admin/productos">
+                        <button class="btn btn-danger" type="button">Panel de administración</button>
+                    </a>
+                </li>
+                <li class="navbar-brand" th:if="${not usuarioLogueado}">
+                    <a href="/login">
+                        <button class="btn btn-info" type="button">Login</button>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ADMIN NAV -->
+<nav th:fragment="navigation-admin" class="navbar navbar-expand-sm bg-info navbar-dark justify-content-center">
+    <ul class="navbar-nav">
+        <li class="navbar-brand">
+            <a href="/admin/productos">
+                <button class="btn btn-dark" type="button">Productos</button>
+            </a>
+        </li>
+        <li class="navbar-brand">
+            <a href="/admin/usuarios">
+                <button class="btn btn-dark" type="button">Usuarios</button>
+            </a>
+        </li>
+        <li class="navbar-brand">
+            <a href="/admin/pedidos">
+                <button class="btn btn-dark" type="button">Pedidos</button>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<footer th:fragment="footer" class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+</footer>
+</body>
+<style>
+.footer {
+  bottom: 0 !important;
+}
+</style>
+</html>
