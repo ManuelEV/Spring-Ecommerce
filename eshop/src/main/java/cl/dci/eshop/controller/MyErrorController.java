@@ -13,6 +13,8 @@ public class MyErrorController implements ErrorController {
         return "extra/error";
     }
 
+
+
     @Override
     public String getErrorPath() {
         return "/error";

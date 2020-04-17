@@ -40,7 +40,12 @@ public class User implements UserDetails {
 
 
 
-    public User(){}
+    public User(){
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+    }
 
     public User(String username,
                 String password,
@@ -98,6 +103,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+
 
     public int getId() {
         return id;

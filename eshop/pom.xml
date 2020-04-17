@@ -8,6 +8,7 @@
 		<version>2.2.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>cl.dci</groupId>
 	<artifactId>eshop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -69,6 +70,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		
 
 	</dependencies>
 

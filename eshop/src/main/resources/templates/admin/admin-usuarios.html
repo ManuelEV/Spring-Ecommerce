@@ -1,17 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
 <!-- Navigation -->
 <nav th:replace="fragments :: navigation-shop"></nav>
 <nav th:replace="fragments :: navigation-admin"></nav>
 
+<div class="container">
+    <h2>Administración de usuarios</h2>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">Lista de usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu1">Crear nuevo usuario</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="container">
+                        <h2>Lista de usuarios</h2>
+                        <table class="table table-dark table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Rol</th>
+                                <th>Opciones</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="usuario: ${usuarios}">
+                                <td th:text="${usuario.username}"></td>
+                                <td th:text="${usuario.role}"></td>
+
+                                <td>
+
+                                    <form action="#" method="post">
+
+                                        <button type="submit" class="btn btn-warning"><i class="fa fa-edit"></i>
+                                        </button>
+                                    </form>
+
+                                    <!--
+                                                                        <form action="#" th:action="@{/api/usuario/delete/{id}(id=${usuario.id})}" method="post">
+
+                                                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i>
+                                                                            </button>
+                                                                        </form>
+
+                                                                        -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6 shadow-lg p-3 mb-5 bg-white rounded"><br>
+                    <h2>Crear nuevo usuario</h2> <br>
+                    <form th:action="@{/api/usuario/crear}" th:object="${usuario}" method="post"
+                          class="text-center justify-content-center">
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span><i class="fa fa-keyboard"></i></span>
+                                </div>
+                            </div>
+                            <input type="text" placeholder="Nombre de usuario" th:field="*{username}" minlength="5">
+                        </div>
+                        <hr>
+                        <div class="col">
+                            <!-- checkbox que nos permite activar o desactivar la opcion -->
+                            <div style="margin-top:10px;">
+                                <input type="checkbox" id="mostrar_contrasena" title="clic para mostrar contraseña"/>
+                                &nbsp;&nbsp;Mostrar Contraseña
+                            </div>
+                        </div>
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span><i class="fa fa-key"></i></span>
+                                </div>
+                            </div>
+                            <input type="password" placeholder="Contraseña" th:field="*{password}" minlength="8"
+                                   id="password" required>
+                        </div>
+                        <div class="input-group mb-3 justify-content-center">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span><i class="fa fa-key"></i></span>
+                                </div>
+                            </div>
+                            <input type="password" placeholder="Confirmar Contraseña" id="confirm_password" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <label for="sel1">Seleccione el rol del usuario:</label><br>
+                                <div class="input-group mb-3 justify-content-center">
+
+                                    <select class="form-control" id="sel1" th:field="*{role}">
+                                        <option th:value="CUSTOMER">USUARIO GENERAL</option>
+                                        <option th:value="ADMIN">ADMINISTRADOR</option>
+                                    </select><br>
+                                </div>
+                            </div>
+                            <div class="col-3"></div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Agregar nuevo producto</button>
+                    </form>
+                    <br>
+                </div>
+                <div class="col-3"></div>
+            </div>
+            <br><br><br><br><br><br><br>
+        </div>
+
+    </div>
+</div>
 
 <!-- Footer -->
 <footer th:replace="fragments :: footer"></footer>
 
 
 </body>
+<!--
 <style>
     footer {
   background-color: black;
@@ -22,4 +148,39 @@
   color: white;
 }
 </style>
+-->
+<script>
+    var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Las contraseñas no coinciden");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+
+
+</script>
+<script>
+$(document).ready(function () {
+  $('#mostrar_contrasena').click(function () {
+    if ($('#mostrar_contrasena').is(':checked')) {
+      $('#password').attr('type', 'text');
+      $('#confirm_password').attr('type', 'text');
+    } else {
+      $('#password').attr('type', 'password');
+      $('#confirm_password').attr('type', 'password');
+    }
+  });
+});
+
+
+
+</script>
 </html>

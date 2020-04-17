@@ -119,6 +119,7 @@ public class TemplateController {
     @GetMapping("registro")
     public String getRegistro(Model modelo) {
         modelo.addAttribute("titulo", "Registro");
+        modelo.addAttribute("usuario", new User());
         return "registro";
     }
 
@@ -151,6 +152,9 @@ public class TemplateController {
     @GetMapping("admin/usuarios")
     public String getAdminUsuarios(Model modelo) {
         basicSetup(modelo, "Administrar usuarios");
+        List<User> users = userRepository.findAll();
+        modelo.addAttribute("usuarios", users);
+        modelo.addAttribute("usuario", new User());
         return "admin/admin-usuarios";
     }
 
@@ -158,7 +162,10 @@ public class TemplateController {
     @GetMapping("admin/productos")
     public String getAdminProductos(Model modelo) {
         basicSetup(modelo, "administrar productos");
+        List<Producto> productos = productoRepository.findAll();
+        modelo.addAttribute("productos", productos);
 
+        modelo.addAttribute("producto", new Producto());
         return "admin/admin-productos";
     }
 
@@ -172,7 +179,6 @@ public class TemplateController {
     private Model basicSetup(Model modelo, String titulo){
         modelo.addAttribute("titulo", titulo);
         modelo.addAttribute("usuarioLogueado", this.usuarioLogueado());
-
         String rol = usuarioLogueado() ? getCurrentUser().getRole().name():"";
         modelo.addAttribute("rolUsuario", rol);
 
@@ -211,7 +217,7 @@ public class TemplateController {
 
     private List<ProductoCarrito> getProductoCarritos(){
         Carrito carrito = getCurrentUser().getCarrito();
-        System.out.println("TESTINGGGGGG"+productoCarritoRepository.findByCarrito(carrito).size());
+        //System.out.println("TESTINGGGGGG"+productoCarritoRepository.findByCarrito(carrito).size());
         return productoCarritoRepository.findByCarrito(carrito);
     }
 

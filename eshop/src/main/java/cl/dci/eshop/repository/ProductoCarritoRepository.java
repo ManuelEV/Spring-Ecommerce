@@ -12,4 +12,5 @@ public interface ProductoCarritoRepository extends JpaRepository<ProductoCarrito
     //Optional<ProductoCarrito> findByProducto(Producto producto);
     //Optional<ProductoCarrito> findByCarrito(Carrito carrito);
     List<ProductoCarrito> findByCarrito(Carrito carrito);
+    List<ProductoCarrito> findByProducto(Producto producto);
 }

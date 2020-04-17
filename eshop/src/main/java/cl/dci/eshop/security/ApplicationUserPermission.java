@@ -6,7 +6,11 @@ public enum ApplicationUserPermission {
     PRODUCTO_UPDATE("producto:update"),
     PRODUCTO_DELETE("producto:delete"),
     CARRITO_MANAGE("carrito:manage"),
-    PERFIL_MANAGE("perfil:manage");
+    PERFIL_MANAGE("perfil:manage"),
+    USUARIO_READ("usuario:read"),
+    USUARIO_WRITE("usuario:write"),
+    USUARIO_UPDATE("usuario:update"),
+    USUARIO_DELETE("usuario:delete");
 
     private final String permission;
 

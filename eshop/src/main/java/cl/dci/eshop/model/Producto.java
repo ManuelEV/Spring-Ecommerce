@@ -26,10 +26,10 @@ public class Producto {
     /*@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
     private List<Carrito> carritos;*/
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.MERGE)
     private List<ProductoCarrito> productoCarritos;
 
-    Producto(){
+    public Producto(){
         //this.carritos = new ArrayList<>();
         this.productoCarritos = new ArrayList<>();
     }
