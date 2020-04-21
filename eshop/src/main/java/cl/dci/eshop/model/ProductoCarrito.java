@@ -1,12 +1,13 @@
 package cl.dci.eshop.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "producto_carrito")
-@Data
+@Data @NoArgsConstructor
 public class ProductoCarrito {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

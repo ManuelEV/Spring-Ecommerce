@@ -40,7 +40,7 @@ public class UserController {
         usuario.setPassword(password);
         userRepository.save(usuario);
         carritoRepository.save(c1);
-        return "redirect:/admin/productos";
+        return "redirect:/admin/usuarios";
     }
 
     
@@ -57,7 +57,7 @@ public class UserController {
         userRepository.save(usuario);
         carritoRepository.save(c1);
         System.out.println("USUARIO: "+usuario);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping
