@@ -1,9 +1,13 @@
 package cl.dci.eshop.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "pedido")
+@Data
 public class Pedido {
 
     @Id
@@ -11,6 +15,7 @@ public class Pedido {
     @Column(name = "pedido_id")
     private int id;
 
-    public Pedido() {
-    }
+    private Date fecha;
+
+
 }
