@@ -1,0 +1,37 @@
+version: '3'
+services:
+  nginx-server:
+   container_name: nginx-server
+   image: nginx:1.13
+   restart: always
+   ports:
+   - 80:80
+   - 443:443
+   volumes:
+   - ./nginx/conf.d:/etc/nginx/conf.d
+   depends_on:
+   - eshop
+ 
+  mysql-db:
+   container_name: mysql-db
+   image: mysql/mysql-server:5.7
+   environment:
+    MYSQL_DATABASE: eshop
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: '%'
+   ports:
+   - "3306:3306"
+   restart: always
+  
+  eshop:
+    restart: always
+    build: ./eshop
+    working_dir: /eshop
+    volumes:
+      - ./eshop:/eshop
+      - ~/.m2:/root/.m2
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - mysql-db
