@@ -47,25 +47,6 @@ public class TemplateController {
         return "login";
     }
 
-    @GetMapping("courses")
-    public String getCourses() {
-        String username = "";
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        User user = null;
-
-        if (principal instanceof User) {
-            username = ((User) principal).getUsername();
-            user = ((User) principal);
-        } else {
-            username = principal.toString();
-        }
-
-        System.out.println(user);
-        System.out.println(username);
-
-        return "courses";
-    }
 
     @GetMapping("catalogo")
     public String getCatalogo(Model modelo) {
