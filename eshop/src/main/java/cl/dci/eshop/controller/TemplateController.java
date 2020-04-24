@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Controller
 @RequestMapping("/")
@@ -170,7 +168,6 @@ public class TemplateController {
     @GetMapping("poblamiento")
     public String getPoblamiento(Model modelo) {
         modelo.addAttribute("usuarioLogueado", this.usuarioLogueado());
-        //testProductoCarrito();
         this.poblarBd();
         return "catalogo";
     }
@@ -182,23 +179,8 @@ public class TemplateController {
 
 
 
-    private void testProductoCarrito(){
-        Producto p = productoRepository.findById(9).orElse(null);
-        Carrito c = carritoRepository.findById(5).orElse(null);
-        /*ProductoCarrito pc1 = new ProductoCarrito(p, c);
-        ProductoCarrito pc2 = new ProductoCarrito(p, c);
-        productoCarritoRepository.save(pc1);
-        productoCarritoRepository.save(pc2);*/
-        //System.out.println(productoCarritoRepository.findByCarrito(c));
-        List<ProductoCarrito> pcs =productoCarritoRepository.findByCarrito(c);
-        for(ProductoCarrito pc: pcs){
-            System.out.println(pc.getProducto());
-        }
-    }
-
     private List<ProductoCarrito> getProductoCarritos(){
         Carrito carrito = getCurrentUser().getCarrito();
-        //System.out.println("TESTINGGGGGG"+productoCarritoRepository.findByCarrito(carrito).size());
         return productoCarritoRepository.findByCarrito(carrito);
     }
 
@@ -218,17 +200,6 @@ public class TemplateController {
         productoRepository.save(p4);
 
 
-
-        /*User user = getCurrentUser();
-        carrito.setUser(user);
-        System.out.println(carrito);*/
-
-        //carritoRepository.save(carrito);
-        /*User u = userRepository.findById(user.getId()).orElse(null);
-
-        u.setCarrito(carrito);
-        userRepository.save(u);
-        System.out.println(u);*/
     }
 
 }
